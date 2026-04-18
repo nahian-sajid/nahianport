@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum VoteTargetType {
+  POST
+  REPLY
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  displayName  String
+  role         Role     @default(USER)
+  createdAt    DateTime @default(now())
+
+  channels Channel[] @relation("ChannelCreatedBy")
+  posts    Post[]
+  replies  Reply[]
+  votes    Vote[]
+
+  @@index([createdAt])
+}
+
+model Channel {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  createdBy   String
+  createdAt   DateTime @default(now())
+
+  creator User @relation("ChannelCreatedBy", fields: [createdBy], references: [id], onDelete: Cascade)
+  posts   Post[]
+
+  @@index([createdAt])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  channelId String
+  authorId  String
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+
+  channel Channel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  author  User    @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  replies Reply[]
+  attachments Attachment[] @relation("PostAttachments")
+
+  @@index([channelId, createdAt])
+  @@index([authorId, createdAt])
+}
+
+model Reply {
+  id            String   @id @default(cuid())
+  postId        String
+  parentReplyId String?
+  authorId      String
+  body          String
+  createdAt     DateTime @default(now())
+
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  parent   Reply?  @relation("ReplyTree", fields: [parentReplyId], references: [id], onDelete: Cascade)
+  children Reply[] @relation("ReplyTree")
+
+  attachments Attachment[] @relation("ReplyAttachments")
+
+  @@index([postId, createdAt])
+  @@index([parentReplyId])
+  @@index([authorId, createdAt])
+}
+
+model Vote {
+  id         String         @id @default(cuid())
+  userId     String
+  targetType VoteTargetType
+  targetId   String
+  value      Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetType, targetId])
+  @@index([targetType, targetId])
+}
+
+model Attachment {
+  id         String         @id @default(cuid())
+  targetType VoteTargetType
+  targetId   String
+  mimeType   String
+  sizeBytes  Int
+  path       String
+  createdAt  DateTime @default(now())
+
+  post  Post?  @relation("PostAttachments", fields: [targetId], references: [id], map: "post_attachment")
+  reply Reply? @relation("ReplyAttachments", fields: [targetId], references: [id], map: "reply_attachment")
+
+  @@index([targetType, targetId])
+}
