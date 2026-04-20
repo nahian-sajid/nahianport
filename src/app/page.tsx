@@ -342,10 +342,11 @@ const projects = [
     href: "/projects/carcare-mobile-application",
   },
   {
-    tag: "IoT",
-    title: "Object Detection System",
+    tag: "Machine learning",
+    title: "Predictive Analysis for Chronic Kidney Disease",
     description:
-      "Implemented a real-time Raspberry Pi object detection pipeline using YOLO, MQTT, and Python with live wireless data visualization and multi-threaded processing.",
+      "Implemented and evaluated supervised machine learning models for chronic kidney disease prediction using Python, scikit-learn, and Pandas, with preprocessing, feature analysis, and model comparison.",
+    href: "/projects/predictive-analysis-chronic-kidney-disease",
   },
 ];
 
