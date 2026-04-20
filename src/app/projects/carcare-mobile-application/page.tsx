@@ -63,7 +63,7 @@ const techStack = [
   "TensorFlow",
   "Google Maps",
   "Google Cloud Vision",
-  "Vertex AI",
+  "Google Cloud Platform",
   "Local JSON storage",
 ];
 
