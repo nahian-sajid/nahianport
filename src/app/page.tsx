@@ -1,129 +1,322 @@
-const skills = [
-  {
-    name: "C",
-    icon: "c",
-    accent: "#4f86c6",
-  },
-  {
-    name: "C++",
-    icon: "cpp",
-    accent: "#2c6fbb",
-  },
-  {
-    name: "Python",
-    icon: "python",
-    accent: "#e3b341",
-  },
-  {
-    name: "JavaScript",
-    icon: "javascript",
-    accent: "#f0c419",
-  },
-  {
-    name: "Verilog HDL",
-    icon: "",
-    accent: "#d95f43",
-  },
-  {
-    name: "React",
-    icon: "react",
-    accent: "#3aaed8",
-  },
-  {
-    name: "React Native",
-    icon: "react",
-    accent: "#43b0f1",
-  },
-  {
-    name: "Node.js",
-    icon: "nodejs",
-    accent: "#5c9f48",
-  },
-  {
-    name: "Firebase",
-    icon: "firebase",
-    accent: "#f38b2a",
-  },
-  {
-    name: "TensorFlow",
-    icon: "tensorflow",
-    accent: "#ff7a00",
-  },
-  {
-    name: "PyTorch",
-    icon: "pytorch",
-    accent: "#ee4c2c",
-  },
-  {
-    name: "Quartus Prime",
-    icon: "",
-    accent: "#7d57c1",
-  },
-  {
-    name: "NumPy",
-    icon: "",
-    accent: "#4c78a8",
-  },
-  {
-    name: "Pandas",
-    icon: "",
-    accent: "#5b4b8a",
-  },
-  {
-    name: "OpenCV",
-    icon: "opencv",
-    accent: "#3f8f5f",
-  },
-  {
-    name: "MQTT",
-    icon: "",
-    accent: "#8a5cf6",
-  },
-  {
-    name: "GCP",
-    icon: "gcp",
-    accent: "#4285f4",
-  },
-  {
-    name: "IntelliJ",
-    icon: "idea",
-    accent: "#d34f73",
-  },
-  {
-    name: "VS Code",
-    icon: "vscode",
-    accent: "#2f80ed",
-  },
-  {
-    name: "PyCharm",
-    icon: "pycharm",
-    accent: "#1dbf73",
-  },
-  {
-    name: "Eclipse",
-    icon: "eclipse",
-    accent: "#6a5acd",
-  },
-  {
-    name: "Cisco Packet Tracer",
-    icon: "",
-    accent: "#0b7285",
-  },
-  {
-    name: "Fritzing",
-    icon: "",
-    accent: "#f08c00",
-  },
-  {
-    name: "Linux",
-    icon: "linux",
-    accent: "#444444",
-  },
-  {
-    name: "Git",
-    icon: "git",
-    accent: "#e76f51",
-  },
+import Image from "next/image";
+
+type Skill = {
+  name: string;
+  icon?: string;
+  iconUrl?: string;
+  mark?: string;
+  accent: string;
+};
+
+function createFallbackSkillIcon(label: string, accent: string) {
+  const foreground = "#fffaf2";
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="${accent}"/>
+      <text
+        x="48"
+        y="56"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="${label.length > 2 ? 28 : 34}"
+        font-weight="700"
+        fill="${foreground}"
+      >${label}</text>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createMediaPipeIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <g fill="#14a3b8">
+        <rect x="14" y="18" width="12" height="46" rx="6"/>
+        <rect x="14" y="66" width="12" height="18" rx="6"/>
+        <rect x="34" y="18" width="12" height="66" rx="6"/>
+        <circle cx="60" cy="26" r="6"/>
+        <rect x="54" y="38" width="12" height="46" rx="6"/>
+        <rect x="74" y="18" width="12" height="66" rx="6"/>
+      </g>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createVoskIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <polygon points="18,24 34,24 26,40" fill="#2f847c"/>
+      <polygon points="34,24 50,24 42,40" fill="#8cc3bf"/>
+      <polygon points="50,24 66,24 58,40" fill="#a9d7d7"/>
+      <polygon points="66,24 82,24 74,40" fill="#b5e0de"/>
+      <polygon points="26,40 42,40 34,56" fill="#4a9992"/>
+      <polygon points="42,40 58,40 50,56" fill="#6eb2ae"/>
+      <polygon points="58,40 74,40 66,56" fill="#88c2c0"/>
+      <polygon points="34,56 50,56 42,72" fill="#66aca5"/>
+      <polygon points="50,56 66,56 58,72" fill="#76b7b0"/>
+      <polygon points="42,72 58,72 50,88" fill="#5da9a0"/>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createQuartusPrimeIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <circle cx="42" cy="44" r="28" fill="#79bbe5" stroke="#0d72b9" stroke-width="5"/>
+      <path d="M22 30c12-12 34-14 48-2" fill="none" stroke="#0d72b9" stroke-width="5" stroke-linecap="round"/>
+      <path d="M24 30c10 6 19 17 28 34" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+      <path d="M59 40l17 5 4 19-17 8-12-10 3-18z" fill="#0c6aa8"/>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createCiscoIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#08233b"/>
+      <g fill="#ffffff">
+        <rect x="16" y="33" width="4" height="10" rx="2"/>
+        <rect x="24" y="28" width="4" height="20" rx="2"/>
+        <rect x="32" y="24" width="4" height="28" rx="2"/>
+        <rect x="40" y="30" width="4" height="16" rx="2"/>
+        <rect x="48" y="34" width="4" height="8" rx="2"/>
+        <rect x="56" y="30" width="4" height="16" rx="2"/>
+        <rect x="64" y="24" width="4" height="28" rx="2"/>
+        <rect x="72" y="28" width="4" height="20" rx="2"/>
+      </g>
+      <text
+        x="48"
+        y="74"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="19"
+        font-weight="700"
+        letter-spacing="2"
+        fill="#ffffff"
+      >CISCO</text>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createFritzingIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#e0311d"/>
+      <rect y="78" width="96" height="18" fill="#8f250d"/>
+      <g fill="#ffffff">
+        <path d="M47 18c0-4 3-7 7-7h10c4 0 7 3 7 7s-3 7-7 7H58v9h8c4 0 7 3 7 7s-3 7-7 7H58v24a13 13 0 1 1-22 0V48h-6c-4 0-7-3-7-7s3-7 7-7h6v-9c0-8 6-14 14-14h4c4 0 7 3 7 7s-3 7-7 7h-3c-1 0-2 1-2 2v9h7V18Z"/>
+      </g>
+      <circle cx="47" cy="70" r="4.5" fill="#4f210d"/>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createRestApiIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <g fill="#0d335b">
+        <circle cx="38" cy="38" r="22"/>
+        <circle cx="58" cy="40" r="18"/>
+        <circle cx="24" cy="52" r="14"/>
+        <circle cx="72" cy="54" r="13"/>
+        <rect x="16" y="46" width="64" height="24" rx="12"/>
+      </g>
+      <text
+        x="48"
+        y="60"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="16"
+        font-weight="700"
+        fill="#ffffff"
+      >{REST}</text>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createExcelIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <rect x="34" y="20" width="36" height="50" rx="5" fill="#21a366"/>
+      <rect x="28" y="28" width="36" height="44" rx="5" fill="#107c41"/>
+      <rect x="20" y="24" width="24" height="48" rx="5" fill="#185c37"/>
+      <rect x="44" y="20" width="26" height="50" rx="5" fill="#33c481" opacity="0.9"/>
+      <path d="M28 34h16v28H28z" fill="#107c41"/>
+      <path d="M27 36h13l-4.5 7 4.8 9H36l-2.2-5-2.1 5h-4.1l4.4-9-4.1-7Z" fill="#ffffff"/>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createQuestaIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <path
+        d="M24 66c-4-8-3-20 4-31 10-14 28-24 38-16 8 7 5 24-5 36-9 11-22 16-31 12M22 64c8 1 15 0 22-4M45 24c8 15 11 28 11 40M43 64c6 2 11 6 18 10"
+        fill="none"
+        stroke="#f58200"
+        stroke-width="6"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createProcessingIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <path d="M52 14h10c15 0 28 13 28 29S77 72 62 72H52V14Z" fill="#1e66e8"/>
+      <path d="M52 30h7c7 0 13 6 13 13s-6 13-13 13h-7V30Z" fill="#ffffff"/>
+      <path d="M14 60l28-34 17 14-28 34-17-14Z" fill="#2937b8"/>
+      <path d="M8 52l16-8 14 17-16 8L8 52Z" fill="#8fb0ff"/>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createSystemVerilogIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <path d="M14 52c8 10 22 16 38 16 12 0 24-3 34-9" fill="none" stroke="#2c2732" stroke-width="4" stroke-linecap="round"/>
+      <path d="M82 44c-8-10-22-16-38-16-12 0-24 3-34 9" fill="none" stroke="#2c2732" stroke-width="4" stroke-linecap="round"/>
+      <text
+        x="48"
+        y="53"
+        text-anchor="middle"
+        font-family="Georgia, serif"
+        font-size="16"
+        fill="#2c2732"
+      >SystemVerilog</text>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function createVerilogIcon() {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
+      <rect width="96" height="96" rx="26" fill="#ffffff"/>
+      <rect x="24" y="24" width="48" height="48" rx="8" fill="#111111"/>
+      <text
+        x="48"
+        y="54"
+        text-anchor="middle"
+        font-family="Arial, sans-serif"
+        font-size="15"
+        font-weight="700"
+        fill="#ffffff"
+      >FPGA</text>
+      <g fill="#111111">
+        <rect x="32" y="8" width="6" height="12" rx="2"/>
+        <rect x="44" y="8" width="6" height="12" rx="2"/>
+        <rect x="56" y="8" width="6" height="12" rx="2"/>
+        <rect x="32" y="76" width="6" height="12" rx="2"/>
+        <rect x="44" y="76" width="6" height="12" rx="2"/>
+        <rect x="56" y="76" width="6" height="12" rx="2"/>
+        <rect x="8" y="32" width="12" height="6" rx="2"/>
+        <rect x="8" y="44" width="12" height="6" rx="2"/>
+        <rect x="8" y="56" width="12" height="6" rx="2"/>
+        <rect x="76" y="32" width="12" height="6" rx="2"/>
+        <rect x="76" y="44" width="12" height="6" rx="2"/>
+        <rect x="76" y="56" width="12" height="6" rx="2"/>
+      </g>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+}
+
+function getSkillImage(skill: Skill) {
+  if (skill.iconUrl) {
+    return skill.iconUrl;
+  }
+
+  if (skill.icon) {
+    return `https://skillicons.dev/icons?i=${skill.icon}`;
+  }
+
+  const label =
+    skill.mark ??
+    skill.name
+      .split(" ")
+      .map((part) => part[0])
+      .join("")
+      .slice(0, 3);
+
+  return createFallbackSkillIcon(label, skill.accent);
+}
+
+const skills: Skill[] = [
+  { name: "C", icon: "c", accent: "#4f86c6" },
+  { name: "C++", icon: "cpp", accent: "#2c6fbb" },
+  { name: "Python", icon: "python", accent: "#e3b341" },
+  { name: "Java", icon: "java", accent: "#e76f51" },
+  { name: "JavaScript", icon: "javascript", accent: "#f0c419" },
+  { name: "TypeScript", icon: "typescript", accent: "#3178c6" },
+  { name: "Processing", iconUrl: createProcessingIcon(), accent: "#1e66e8" },
+  { name: "Verilog HDL", iconUrl: createVerilogIcon(), accent: "#111111" },
+  { name: "SystemVerilog", iconUrl: createSystemVerilogIcon(), accent: "#2c2732" },
+  { name: "Bash / C Shell", icon: "bash", accent: "#4caf50" },
+  { name: "React", icon: "react", accent: "#3aaed8" },
+  { name: "React Native", icon: "react", accent: "#43b0f1" },
+  { name: "Node.js", icon: "nodejs", accent: "#5c9f48" },
+  { name: "Expo", iconUrl: "https://cdn.simpleicons.org/expo/111111", accent: "#111111" },
+  { name: "Jest", icon: "jest", accent: "#a93e52" },
+  { name: "NumPy", iconUrl: "https://cdn.simpleicons.org/numpy/4DABCF", accent: "#4c78a8" },
+  { name: "Pandas", iconUrl: "https://cdn.simpleicons.org/pandas/150458", accent: "#5b4b8a" },
+  { name: "OpenCV", icon: "opencv", accent: "#3f8f5f" },
+  { name: "TensorFlow", icon: "tensorflow", accent: "#ff7a00" },
+  { name: "PyTorch", icon: "pytorch", accent: "#ee4c2c" },
+  { name: "MediaPipe", iconUrl: createMediaPipeIcon(), accent: "#14a3b8" },
+  { name: "VOSK", iconUrl: createVoskIcon(), accent: "#5aa9a3" },
+  { name: "Raspberry Pi", iconUrl: "https://cdn.simpleicons.org/raspberrypi/C51A4A", accent: "#bc1142" },
+  { name: "Quartus Prime", iconUrl: createQuartusPrimeIcon(), accent: "#0d72b9" },
+  { name: "MQTT", iconUrl: "https://cdn.simpleicons.org/mqtt/660066", accent: "#8a5cf6" },
+  { name: "Cisco Packet Tracer", iconUrl: createCiscoIcon(), accent: "#08233b" },
+  { name: "Fritzing", iconUrl: createFritzingIcon(), accent: "#e0311d" },
+  { name: "Firebase", icon: "firebase", accent: "#f38b2a" },
+  { name: "MySQL", icon: "mysql", accent: "#00758f" },
+  { name: "PostgreSQL", icon: "postgres", accent: "#336791" },
+  { name: "GCP", icon: "gcp", accent: "#4285f4" },
+  { name: "REST APIs", iconUrl: createRestApiIcon(), accent: "#0d335b" },
+  { name: "Git", icon: "git", accent: "#e76f51" },
+  { name: "GitHub", iconUrl: "https://cdn.simpleicons.org/github/111111", accent: "#111111" },
+  { name: "Linux", icon: "linux", accent: "#444444" },
+  { name: "VS Code", icon: "vscode", accent: "#2f80ed" },
+  { name: "IntelliJ IDEA", icon: "idea", accent: "#d34f73" },
+  { name: "PyCharm", icon: "pycharm", accent: "#1dbf73" },
+  { name: "Eclipse", icon: "eclipse", accent: "#6a5acd" },
+  { name: "Jupyter", iconUrl: "https://cdn.simpleicons.org/jupyter/F37626", accent: "#f37726" },
+  { name: "Excel", iconUrl: createExcelIcon(), accent: "#217346" },
+  { name: "Postman", icon: "postman", accent: "#f26b3a" },
+  { name: "QuestaSim / ModelSim", iconUrl: createQuestaIcon(), accent: "#f58200" },
 ];
 
 const projects = [
@@ -241,7 +434,14 @@ export default function Home() {
       <header className="site-nav">
         <div className="section site-nav__inner">
           <a className="brand" href="#top">
-            NS
+            <Image
+              alt="Nahian Sajid"
+              className="brand__avatar"
+              height={52}
+              priority
+              src="/nahian-profile.png"
+              width={52}
+            />
           </a>
           <nav className="nav-links" aria-label="Primary">
             <a href="#about">About</a>
@@ -284,7 +484,7 @@ export default function Home() {
             </div>
             <div className="hero-card__grid">
               <div className="hero-card__metric">
-                <strong>20+</strong>
+                <strong>40+</strong>
                 <span>Tools and technologies</span>
               </div>
               <div className="hero-card__metric">
@@ -323,21 +523,11 @@ export default function Home() {
                   tabIndex={0}
                 >
                   <div className="skill-card__front" aria-hidden="true">
-                    {skill.icon ? (
-                      <img
-                        alt=""
-                        className="skill-card__logo"
-                        src={`https://skillicons.dev/icons?i=${skill.icon}`}
-                      />
-                    ) : (
-                      <span className="skill-card__mark">
-                        {skill.name
-                          .split(" ")
-                          .map((part) => part[0])
-                          .join("")
-                          .slice(0, 2)}
-                      </span>
-                    )}
+                    <img
+                      alt=""
+                      className="skill-card__logo"
+                      src={getSkillImage(skill)}
+                    />
                   </div>
                   <div className="skill-card__overlay">
                     <strong>{skill.name}</strong>
@@ -405,8 +595,8 @@ export default function Home() {
 
           <section className="panel" id="contact">
             <div className="section-heading">
-              <span className="section-heading__eyebrow">Let&apos;s Chat</span>
-              <h2>If you have any questions, or just want to talk, please reach out!</h2>
+              <span className="section-heading__eyebrow">More About Me</span>
+              <h2>Explore my links, work, and background in one place.</h2>
             </div>
             <div className="contact-grid">
               {contacts.map((contact) => (
