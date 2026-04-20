@@ -504,39 +504,6 @@ export default function Home() {
         </section>
 
         <div className="section content-grid">
-          <section className="panel">
-            <div className="section-heading">
-              <span className="section-heading__eyebrow">My Skills</span>
-              <h2>Tools I use to build, test, and explore.</h2>
-              <p>
-                My toolkit spans software development, embedded systems,
-                machine learning, and the developer tools that support
-                fast-moving technical work.
-              </p>
-            </div>
-            <div className="skills-grid">
-              {skills.map((skill) => (
-                <article
-                  className="skill-card"
-                  key={skill.name}
-                  style={{ "--skill-accent": skill.accent } as React.CSSProperties}
-                  tabIndex={0}
-                >
-                  <div className="skill-card__front" aria-hidden="true">
-                    <img
-                      alt=""
-                      className="skill-card__logo"
-                      src={getSkillImage(skill)}
-                    />
-                  </div>
-                  <div className="skill-card__overlay">
-                    <strong>{skill.name}</strong>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
           <section className="panel" id="projects">
             <div className="section-heading">
               <span className="section-heading__eyebrow">Projects</span>
@@ -572,7 +539,7 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="panel">
+          <section className="panel" id="experience">
             <div className="section-heading">
               <span className="section-heading__eyebrow">Experience</span>
               <h2>Here&apos;s the rundown.</h2>
@@ -588,6 +555,39 @@ export default function Home() {
                   <span className="experience-card__tag">{experience.tag}</span>
                   <h3>{experience.title}</h3>
                   <p>{experience.description}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="panel" id="tools">
+            <div className="section-heading">
+              <span className="section-heading__eyebrow">My Skills</span>
+              <h2>Tools I use to build, test, and explore.</h2>
+              <p>
+                My toolkit spans software development, embedded systems,
+                machine learning, and the developer tools that support
+                fast-moving technical work.
+              </p>
+            </div>
+            <div className="skills-grid">
+              {skills.map((skill) => (
+                <article
+                  className="skill-card"
+                  key={skill.name}
+                  style={{ "--skill-accent": skill.accent } as React.CSSProperties}
+                  tabIndex={0}
+                >
+                  <div className="skill-card__front" aria-hidden="true">
+                    <img
+                      alt=""
+                      className="skill-card__logo"
+                      src={getSkillImage(skill)}
+                    />
+                  </div>
+                  <div className="skill-card__overlay">
+                    <strong>{skill.name}</strong>
+                  </div>
                 </article>
               ))}
             </div>
