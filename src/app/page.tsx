@@ -497,7 +497,7 @@ export default function Home() {
                 <span>Graduated</span>
               </div>
               <div className="hero-card__metric">
-                <strong>2</strong>
+                <strong>1</strong>
                 <span>Tekarra roles completed</span>
               </div>
             </div>
