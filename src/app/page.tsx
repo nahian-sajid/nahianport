@@ -460,7 +460,7 @@ export default function Home() {
               University of Saskatchewan based in Canada. I enjoy building
               across AI, embedded systems, hardware design, assistive
               technology, machine learning, mobile development, finance-focused
-              analysis, technical analysis, and practical software engineering.
+              analysis, technical analysis, and computer engineering.
             </p>
             <div className="hero-actions">
               <a className="button-primary" href="#projects">
