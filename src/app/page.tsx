@@ -458,8 +458,9 @@ export default function Home() {
             <p>
               I&apos;m Nahian Sajid, a computer engineering student at the
               University of Saskatchewan based in Canada. I enjoy building
-              across AI, embedded systems, mobile development, finance-focused
-              analysis, and practical software engineering.
+              across AI, embedded systems, hardware design, assistive
+              technology, machine learning, mobile development, finance-focused
+              analysis, technical analysis, and practical software engineering.
             </p>
             <div className="hero-actions">
               <a className="button-primary" href="#projects">
@@ -493,7 +494,7 @@ export default function Home() {
               </div>
               <div className="hero-card__metric">
                 <strong>2026</strong>
-                <span>Expected graduation</span>
+                <span>Graduated</span>
               </div>
               <div className="hero-card__metric">
                 <strong>2</strong>
