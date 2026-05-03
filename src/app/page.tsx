@@ -457,10 +457,11 @@ export default function Home() {
             <span className="eyebrow">Computer Engineering</span>
             <h1>Hello, I&apos;m Nahian</h1>
             <p>
-              I&apos;m Nahian Sajid, based in Canada. I enjoy building across
-              AI, embedded systems, hardware design, assistive technology,
-              machine learning, mobile development, finance-focused analysis,
-              technical analysis, and computer engineering.
+              I&apos;m Nahian Sajid, a University of Saskatchewan computer
+              engineering alumnus based in Canada. I enjoy building across AI,
+              embedded systems, hardware design, assistive technology, machine
+              learning, mobile development, finance-focused analysis, technical
+              analysis, and computer engineering.
             </p>
             <div className="hero-actions">
               <a className="button-primary" href="#projects">

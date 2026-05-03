@@ -15,7 +15,7 @@ const bodyFont = Manrope({
 export const metadata: Metadata = {
   title: "Nahian Sajid | Computer Engineering Portfolio",
   description:
-    "Portfolio site for Nahian Sajid in Canada focused on AI, embedded systems, mobile development, and practical software engineering.",
+    "Portfolio site for Nahian Sajid, a University of Saskatchewan computer engineering alumnus in Canada focused on AI, embedded systems, mobile development, and practical software engineering.",
 };
 
 export default function RootLayout({
